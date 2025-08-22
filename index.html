@@ -4,18 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vendita AI — ICSC QR Landing</title>
-  <meta name="description" content="Meet Vendita AI at ICSC Booth #3013. AI‑powered site selection and CRE intelligence with transparent, explainable insights. Book a live demo."/>
+  <meta name="description" content="Meet Vendita AI at ICSC Booth #3013. AI-powered site selection and CRE intelligence with transparent, explainable insights. Book a live demo."/>
   <link rel="icon" href="/favicon.ico" />
   <style>
     :root{
-      --bg:#0b1220;              /* dark backdrop behind video */
-      --blue:#1E67FF;            /* Vendita blue */
-      --blue-2:#0A2AFF;          /* deeper blue */
-      --text:#0b1220;            /* dark text for white cards */
-      --white:#ffffff;           
-      --muted:#51607a;           /* muted dark */
-      --card:#ffffff;            /* card background */
-      --card-b:#e8eef7;          /* card border */
+      --bg:#0b1220;
+      --blue:#1E67FF;
+      --blue-2:#0A2AFF;
+      --text:#0b1220;
+      --white:#ffffff;
+      --muted:#51607a;
+      --card:#ffffff;
+      --card-b:#e8eef7;
       --radius:12px;
       --shadow:0 12px 28px rgba(0,0,0,.28);
       --max: 1100px;
@@ -32,9 +32,8 @@
     .site-header{position:sticky;top:0;z-index:10;background:#fff;color:var(--text);border-bottom:1px solid #eef2f8}
     .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
     .brand{display:flex;align-items:center;gap:10px}
-    .brand img{height:32px;width:auto}
-    .brand .wordmark{font-weight:800;color:var(--text)}
-    .cta{display:flex;gap:10px}
+    .brand img.brand-img{height:40px;width:auto;display:block}
+    .header-right{display:flex;align-items:center;gap:16px}
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:10px;border:1px solid #d7e2f3;color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue-2));font-weight:800;text-decoration:none;box-shadow:0 8px 22px rgba(30,103,255,.32)}
 
     .tagline-bar{background:#ffffff;border-top:1px solid #eef2f8;border-bottom:1px solid #eef2f8}
@@ -45,18 +44,17 @@
     .container{max-width:var(--max);margin:0 auto;padding:22px}
     .stack{display:grid;gap:22px;margin-top:22px}
 
-    /* ===== Card / Box styling (no bubbles) ===== */
+    /* ===== Card / Box styling ===== */
     .card{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);box-shadow:var(--shadow);color:var(--text)}
     .card .inner{padding:22px}
     .card h2{margin:0 0 10px;font-size:22px;color:var(--text)}
     .card p{margin:0;color:var(--muted)}
+    .card.narrow{max-width:740px;margin:0 auto;text-align:center}
 
-    /* Booth notice */
     .notice{background:#fff;border:1px solid var(--card-b);border-left:4px solid var(--blue);border-radius:10px;box-shadow:var(--shadow);color:var(--text)}
     .notice .inner{padding:14px 18px;display:flex;align-items:center;gap:10px;justify-content:center;font-weight:800}
     .notice svg{flex:0 0 auto}
 
-    /* Links row */
     .links-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .link-card{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);padding:18px;text-align:center;box-shadow:var(--shadow);transition:transform .08s ease, box-shadow .2s ease}
     .link-card:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(0,0,0,.35)}
@@ -67,8 +65,8 @@
 
     @media (max-width: 900px){
       .links-row{grid-template-columns:1fr}
-      .brand .wordmark{display:none} /* keep it clean on mobile */
       .tagline-inner{font-size:14px}
+      .brand img.brand-img{height:34px}
     }
   </style>
 </head>
@@ -81,15 +79,13 @@
     <div class="bg-gradient"></div>
   </div>
 
-  <!-- ===== Header with brand left & full-width tagline ===== -->
+  <!-- ===== Header ===== -->
   <header class="site-header">
     <div class="header-inner">
       <div class="brand">
-        <img src="/vendita_logo_2_final.png" alt="Vendita AI logo" width="36" height="36"/>
-        <div class="wordmark">Vendita AI</div>
+        <img src="/vendita_logo_2_final.png" alt="Vendita AI logo and wordmark" class="brand-img"/>
       </div>
-      </div>
-      <div class="cta">
+      <div class="header-right">
         <a class="btn" href="#demo">Book Demo</a>
       </div>
     </div>
@@ -101,7 +97,6 @@
   <!-- ===== Main ===== -->
   <main class="container">
     <div class="stack">
-      <!-- Booth Notice (clean, professional) -->
       <section class="notice" aria-label="ICSC Booth">
         <div class="inner">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-7z" stroke="#1E67FF" stroke-width="1.6"/></svg>
@@ -109,7 +104,6 @@
         </div>
       </section>
 
-      <!-- About Us / Elevator Pitch (boxed) -->
       <section class="card narrow" aria-labelledby="about-title">
         <div class="inner">
           <h2 id="about-title">About Us</h2>
@@ -119,15 +113,13 @@
         </div>
       </section>
 
-      <!-- Book a Demo (boxed) -->
       <section class="card narrow" id="demo" aria-labelledby="demo-title">
-        <div class="inner" style="text-align:center">
+        <div class="inner">
           <h2 id="demo-title">Book a Demo</h2>
           <a class="btn" style="margin-top:6px" href="https://link.bzail.ai/widget/bookings/venditacre" target="_blank" rel="noopener">Schedule via Calendly</a>
         </div>
       </section>
 
-      <!-- Links (boxed) -->
       <section class="links-row" aria-label="Products and Links">
         <div class="link-card">
           <a href="https://vendita.ai/" target="_blank" rel="noopener">Vendita AI</a>
@@ -150,9 +142,9 @@
   </main>
 
   <script>
-    // Year stamp
     document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
 
