@@ -8,14 +8,16 @@
   <link rel="icon" href="/favicon.ico" />
   <style>
     :root{
-      --bg:#0b1220;          /* backdrop tone behind video */
-      --blue:#1E67FF;        /* Vendita blue */
-      --blue-2:#0A2AFF;      /* deeper blue */
-      --white:#ffffff;
-      --muted:#c9d3e5;
-      --panel: rgba(30,103,255,.90);
-      --radius:16px;
-      --shadow:0 14px 34px rgba(0,0,0,.38);
+      --bg:#0b1220;              /* dark backdrop behind video */
+      --blue:#1E67FF;            /* Vendita blue */
+      --blue-2:#0A2AFF;          /* deeper blue */
+      --text:#0b1220;            /* dark text for white cards */
+      --white:#ffffff;           
+      --muted:#51607a;           /* muted dark */
+      --card:#ffffff;            /* card background */
+      --card-b:#e8eef7;          /* card border */
+      --radius:12px;
+      --shadow:0 12px 28px rgba(0,0,0,.28);
       --max: 1100px;
     }
     *,*::before,*::after{box-sizing:border-box}
@@ -24,109 +26,118 @@
     /* ===== Background ===== */
     .bg-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden}
     .bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.38) saturate(1.05)}
-    .bg-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.42);display:none}
-    .bg-gradient{position:absolute;inset:0;background:radial-gradient(1200px 700px at 80% -10%, rgba(30,103,255,.28), transparent 60%), linear-gradient(180deg, rgba(11,18,32,.25), rgba(11,18,32,.72));z-index:1}
+    .bg-gradient{position:absolute;inset:0;background:radial-gradient(1200px 700px at 80% -10%, rgba(30,103,255,.24), transparent 60%), linear-gradient(180deg, rgba(11,18,32,.25), rgba(11,18,32,.72));z-index:1}
 
     /* ===== Header ===== */
-    .header{position:sticky;top:0;z-index:10;background:#fff;color:#0b1220;border-bottom:1px solid rgba(0,0,0,.08)}
-    .header-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:10px;padding:10px 20px}
-    .tagline{justify-self:center;font-weight:800;font-size:15px;letter-spacing:.2px;text-align:center}
-    .brand{justify-self:end;display:flex;align-items:center;gap:10px}
+    .site-header{position:sticky;top:0;z-index:10;background:#fff;color:var(--text);border-bottom:1px solid #eef2f8}
+    .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+    .brand{display:flex;align-items:center;gap:10px}
     .brand img{height:32px;width:auto}
-    .wordmark{font-weight:800}
+    .brand .wordmark{font-weight:800;color:var(--text)}
+    .cta{display:flex;gap:10px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:10px;border:1px solid #d7e2f3;color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue-2));font-weight:800;text-decoration:none;box-shadow:0 8px 22px rgba(30,103,255,.32)}
+
+    .tagline-bar{background:#ffffff;border-top:1px solid #eef2f8;border-bottom:1px solid #eef2f8}
+    .tagline-inner{max-width:var(--max);margin:0 auto;padding:10px 20px;text-align:center;font-weight:900;letter-spacing:.3px;color:var(--text)}
+    .tagline-inner span{color:var(--blue)}
 
     /* ===== Layout ===== */
     .container{max-width:var(--max);margin:0 auto;padding:22px}
     .stack{display:grid;gap:22px;margin-top:22px}
 
-    /* Panels */
-    .panel{background:var(--panel);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;backdrop-filter:saturate(1.1)}
-    .panel-inner{padding:24px}
-    .panel h2{margin:0 0 12px;font-size:22px}
-    .panel p{margin:0;color:#eef3ff;font-size:16px}
+    /* ===== Card / Box styling (no bubbles) ===== */
+    .card{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);box-shadow:var(--shadow);color:var(--text)}
+    .card .inner{padding:22px}
+    .card h2{margin:0 0 10px;font-size:22px;color:var(--text)}
+    .card p{margin:0;color:var(--muted)}
 
-    /* Badge */
-    .badge{display:inline-block;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-weight:800;color:#fff;margin-bottom:14px}
+    /* Booth notice */
+    .notice{background:#fff;border:1px solid var(--card-b);border-left:4px solid var(--blue);border-radius:10px;box-shadow:var(--shadow);color:var(--text)}
+    .notice .inner{padding:14px 18px;display:flex;align-items:center;gap:10px;justify-content:center;font-weight:800}
+    .notice svg{flex:0 0 auto}
 
     /* Links row */
     .links-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .link-card{background:var(--panel);border:1px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:18px;text-align:center;box-shadow:var(--shadow);transition:transform .08s ease, box-shadow .2s ease}
-    .link-card:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(0,0,0,.4)}
-    .link-card a{color:var(--white);font-weight:900;text-decoration:none;font-size:18px}
-    .suburl{display:block;color:#e2ebff;font-size:13px;opacity:.9;margin-top:6px}
-
-    /* Buttons */
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:var(--white);font-weight:800;text-decoration:none;box-shadow:none;transition:transform .06s ease, box-shadow .2s ease}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(30,103,255,.42)}
-    .btn.primary{background:linear-gradient(135deg,var(--blue),var(--blue-2));border:none}
+    .link-card{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);padding:18px;text-align:center;box-shadow:var(--shadow);transition:transform .08s ease, box-shadow .2s ease}
+    .link-card:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(0,0,0,.35)}
+    .link-card a{color:var(--text);font-weight:900;text-decoration:none;font-size:18px}
+    .suburl{display:block;color:#6d7b95;font-size:13px;margin-top:6px}
 
     footer{color:#c9d3e5;font-size:14px;margin:34px 0;text-align:center}
 
     @media (max-width: 900px){
-      .header-inner{grid-template-columns:1fr auto 1fr}
-      .tagline{font-size:14px}
       .links-row{grid-template-columns:1fr}
+      .brand .wordmark{display:none} /* keep it clean on mobile */
+      .tagline-inner{font-size:14px}
     }
   </style>
 </head>
 <body>
-  <!-- ===== Background Layer ===== -->
+  <!-- ===== Background ===== -->
   <div class="bg-wrap" aria-hidden="true">
-    <video class="bg-video" id="bgVideo" autoplay muted loop playsinline poster="/skyscraper_still.png">
+    <video class="bg-video" autoplay muted loop playsinline poster="/skyscraper_still.png">
       <source src="/skyscraper_small.mp4" type="video/mp4" />
     </video>
-    <img class="bg-fallback" id="bgFallback" src="/skyscraper_still.png" alt="City skyline"/>
     <div class="bg-gradient"></div>
   </div>
 
-  <!-- ===== Header ===== -->
-  <header class="header">
+  <!-- ===== Header with brand left & full-width tagline ===== -->
+  <header class="site-header">
     <div class="header-inner">
-      <div></div>
-      <div class="tagline">“Powering the Future Of Real Estate”</div>
       <div class="brand">
-        <div class="wordmark">Vendita AI</div>
         <img src="/vendita_logo_2_final.png" alt="Vendita AI logo"/>
+        <div class="wordmark">Vendita AI</div>
       </div>
+      <div class="cta">
+        <a class="btn" href="#demo">Book Demo</a>
+      </div>
+    </div>
+    <div class="tagline-bar">
+      <div class="tagline-inner">Powering the <span>Future of Real Estate</span></div>
     </div>
   </header>
 
   <!-- ===== Main ===== -->
   <main class="container">
     <div class="stack">
-      <!-- Booth Badge -->
-      <div class="badge">Come see us at Booth #3013</div>
+      <!-- Booth Notice (clean, professional) -->
+      <section class="notice" aria-label="ICSC Booth">
+        <div class="inner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-7z" stroke="#1E67FF" stroke-width="1.6"/></svg>
+          Come see us at <strong>ICSC • Booth #3013</strong>
+        </div>
+      </section>
 
-      <!-- Elevator Pitch (centered) -->
-      <section class="panel" aria-labelledby="about-title">
-        <div class="panel-inner">
+      <!-- About Us / Elevator Pitch (boxed) -->
+      <section class="card" aria-labelledby="about-title">
+        <div class="inner">
           <h2 id="about-title">About Us</h2>
           <p>
-            Join us at ICSC to experience how <strong>Vendita AI</strong> brings next‑generation intelligence to commercial real estate. Our platform suite — including <strong>BZAIL Site Selection</strong>, <strong>Vendita CRE</strong>, and <strong>BZAIL CRM</strong> — unifies thousands of market signals into <em>clear, explainable insights</em> so your team can choose the right locations, faster, with confidence. See how BZAIL aggregates public assessor data across the U.S. and pairs it with proprietary modeling to surface the best opportunities in minutes, not months. Meet the team, ask questions, and explore live demos tailored to your portfolio.
+            Meet <strong>Vendita AI</strong> at ICSC and see how our suite — <strong>BZAIL Site Selection</strong>, <strong>Vendita CRE</strong>, and <strong>BZAIL CRM</strong> — turns complex market data into clear, actionable guidance. We unify thousands of signals across markets and parcels to help owners, investors, and operators identify the right locations, quantify risk, and accelerate decisions with <em>explainable AI</em> you can present to stakeholders.
           </p>
         </div>
       </section>
 
-      <!-- Book a Demo -->
-      <section class="panel" id="demo">
-        <div class="panel-inner">
-          <h2>Book a Demo</h2>
-          <a class="btn primary" href="https://link.bzail.ai/widget/bookings/venditacre" target="_blank" rel="noopener" data-track="cta_book_demo">Schedule via Calendly</a>
+      <!-- Book a Demo (boxed) -->
+      <section class="card" id="demo" aria-labelledby="demo-title">
+        <div class="inner">
+          <h2 id="demo-title">Book a Demo</h2>
+          <a class="btn" style="margin-top:6px" href="https://link.bzail.ai/widget/bookings/venditacre" target="_blank" rel="noopener">Schedule via Calendly</a>
         </div>
       </section>
 
-      <!-- Links -->
+      <!-- Links (boxed) -->
       <section class="links-row" aria-label="Products and Links">
         <div class="link-card">
-          <a href="https://vendita.ai/" target="_blank" rel="noopener" data-track="cta_vendita">Vendita AI</a>
+          <a href="https://vendita.ai/" target="_blank" rel="noopener">Vendita AI</a>
           <span class="suburl">vendita.ai</span>
         </div>
         <div class="link-card">
-          <a href="https://bzail.com/" target="_blank" rel="noopener" data-track="cta_bzail">BZAIL Site Selection</a>
+          <a href="https://bzail.com/" target="_blank" rel="noopener">BZAIL Site Selection</a>
           <span class="suburl">bzail.com</span>
         </div>
         <div class="link-card">
-          <a href="https://vendita.ai/vendita-cre/" target="_blank" rel="noopener" data-track="cta_cre">Vendita CRE</a>
+          <a href="https://vendita.ai/vendita-cre/" target="_blank" rel="noopener">Vendita CRE</a>
           <span class="suburl">vendita.ai/vendita-cre</span>
         </div>
       </section>
@@ -140,23 +151,6 @@
   <script>
     // Year stamp
     document.getElementById('yr').textContent = new Date().getFullYear();
-
-    // Always play video; if it fails, reveal fallback still
-    (function(){
-      const v=document.getElementById('bgVideo');
-      const img=document.getElementById('bgFallback');
-      function fallback(){ if(img) img.style.display='block'; if(v) v.remove(); }
-      if(v){ const p=v.play&&v.play(); if(p&&typeof p.catch==='function') p.catch(fallback); v.addEventListener('error', fallback); }
-    })();
-
-    // CTA tracking hooks for GA4/Meta if present
-    document.querySelectorAll('[data-track]').forEach(el=>{
-      el.addEventListener('click',()=>{
-        const label = el.getAttribute('data-track');
-        if(typeof gtag==='function') gtag('event','click',{event_category:'cta',event_label:label});
-        if(typeof fbq==='function') fbq('trackCustom','CTA_Click',{label});
-      });
-    });
   </script>
 </body>
 </html>
