@@ -1,204 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vendita AI — ICSC QR Landing</title>
-  <meta name="description" content="Vendita AI — BZAIL Site Selection for brokers, developers, and investors. Streamline due diligence, surface off-market opportunities, and close deals faster. Book a demo.">
-  <link rel="icon" href="favicon.ico" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendita AI - ICSC 2025</title>
   <style>
-    :root{
-      --bg:#0b1220;
-      --blue:#1E67FF;      /* Vendita blue */
-      --blue-2:#0A2AFF;
-      --text:#0b1220;      /* dark text for white surfaces */
-      --white:#ffffff;
-      --muted:#51607a;
-      --card:#ffffff;      /* card background */
-      --card-b:#e8eef7;    /* card border */
-      --radius:12px;
-      --shadow:0 12px 28px rgba(0,0,0,.28);
-      --max:1100px;
-    }
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5}
-    html{scroll-behavior:smooth}
-
-    /* ===== Background (robust) ===== */
-    .bg-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#0b1220}
-    .bg-wrap::after{ /* subtle gradient for legibility */
-      content:"";position:absolute;inset:0;
-      background:radial-gradient(1200px 700px at 80% -10%, rgba(30,103,255,.24), transparent 60%),
-                 linear-gradient(180deg, rgba(11,18,32,.25), rgba(11,18,32,.72));
-      z-index:1;pointer-events:none;
-    }
-    .bg-video{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;filter:brightness(.38) saturate(1.05);
-      background:url('skyscraper_still.png') center/cover no-repeat; /* poster fallback */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100%;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
     }
 
-    /* ===== Header ===== */
-    .site-header{position:sticky;top:0;z-index:10;background:#fff;color:var(--text);border-bottom:1px solid #eef2f8}
-    .header-bar{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand img.logo{height:52px;width:auto;display:block}
-    .brand .company{font-weight:800;color:var(--blue);font-size:20px;letter-spacing:.2px}
-    .header-right{display:flex;align-items:center;gap:16px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 16px;border-radius:10px;border:1px solid #d7e2f3;
-      color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue-2));
-      font-weight:800;text-decoration:none;box-shadow:0 8px 22px rgba(30,103,255,.32)
+    /* Background video */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
     }
 
-    .tagline-bar{background:#ffffff;border-top:1px solid #eef2f8;border-bottom:1px solid #eef2f8}
-    .tagline-inner{
-      max-width:var(--max);margin:0 auto;padding:14px 20px;
-      text-align:center;font-weight:900;letter-spacing:.3px;color:var(--text);font-size:22px
+    /* Overlay */
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px;
     }
-    .tagline-inner span{color:var(--blue)}
 
-    /* ===== Layout ===== */
-    .container{max-width:var(--max);margin:0 auto;padding:22px}
-    .stack{display:grid;gap:22px;margin-top:22px}
+    /* Header */
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: white;
+      color: #0056b3;
+      font-weight: bold;
+    }
+    header img {
+      height: 50px;
+      margin-right: 10px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    .header-quote {
+      flex: 1;
+      text-align: center;
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #0056b3;
+    }
+    .header-right a {
+      background: #0056b3;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-    /* ===== Cards ===== */
-    .card{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);box-shadow:var(--shadow);color:var(--text)}
-    .card .inner{padding:22px}
-    .card h2{margin:0 0 10px;font-size:22px;color:var(--text)}
-    .card p{margin:0;color:var(--muted)}
-    .card.narrow{max-width:740px;margin:0 auto;text-align:center} /* centered About */
-    #demo.card{width:100%} /* full width to align with links grid */
+    /* Hero Section */
+    .hero {
+      margin-top: 40px;
+    }
+    .hero h1 {
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+    .hero h2 {
+      font-size: 1.4em;
+      margin-bottom: 25px;
+      color: #f0f0f0;
+    }
 
-    /* Notice */
-    .notice{background:#fff;border:1px solid var(--card-b);border-left:4px solid var(--blue);border-radius:10px;box-shadow:var(--shadow);color:var(--text)}
-    .notice .inner{padding:14px 18px;display:flex;align-items:center;gap:10px;justify-content:center;font-weight:800}
-    .notice svg{flex:0 0 auto}
+    /* Content boxes */
+    .content-box {
+      background: #0056b3;
+      color: white;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
 
-    /* Links grid */
-    .links-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .link-card{background:var(--card);border:1px solid var(--card-b);border-radius:var(--radius);padding:18px;text-align:center;box-shadow:var(--shadow);transition:transform .08s ease, box-shadow .2s ease}
-    .link-card:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(0,0,0,.35)}
-    .link-card a{color:var(--text);font-weight:900;text-decoration:none;font-size:18px}
-    .suburl{display:block;color:#6d7b95;font-size:13px;margin-top:6px}
-
-    footer{color:#c9d3e5;font-size:14px;margin:34px 0;text-align:center}
-
-    @media (max-width: 900px){
-      .links-row{grid-template-columns:1fr}
-      .tagline-inner{font-size:19px}
-      .brand img.logo{height:44px}
+    .links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .link-box {
+      background: #0056b3;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 220px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+    .link-box:hover {
+      background: #003f80;
+    }
+    .link-box a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <!-- ===== Background (video with robust fallbacks) ===== -->
-  <div class="bg-wrap" aria-hidden="true">
-    <video class="bg-video" id="bgVideo"
-      preload="auto" autoplay muted loop playsinline webkit-playsinline
-      poster="skyscraper_still.png">
-      <source src="skyscraper_small.mp4" type="video/mp4" />
-    </video>
-  </div>
+  <!-- Background Video with WebM fallback -->
+  <video autoplay loop muted playsinline id="bg-video" poster="skyscraper_still.png">
+    <source src="skyscraper.mp4" type="video/mp4">
+    <source src="skyscraper.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
 
-  <!-- ===== Header ===== -->
-  <header class="site-header">
-    <div class="header-bar">
-      <div class="brand">
-        <!-- Your NEW logo-only PNG -->
-        <img src="vendita_logo_1.png" alt="Vendita logo" class="logo" />
-        <div class="company">Vendita AI</div>
+  <div class="overlay">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <img src="vendita_logo_1.png" alt="Vendita Logo">
+        <span>Vendita AI</span>
       </div>
+      <div class="header-quote">Powering the Future of Real Estate</div>
       <div class="header-right">
-        <a class="btn" href="#demo">Book a Demo</a>
+        <a href="https://link.bzail.ai/widget/bookings/venditacre" target="_blank">Book a Demo</a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Come See Us at Booth #3013</h1>
+      <h2>ICSC 2025 | Orlando, FL</h2>
+    </div>
+
+    <!-- About Us -->
+    <div class="content-box">
+      <h2>About Us</h2>
+      <p>
+        Vendita AI’s Site Selection Tool is built for brokers, developers, and investors.  
+        It drastically speeds up the due diligence process, giving you actionable insights  
+        into off-market properties. With data-driven intelligence at your fingertips, you  
+        can identify opportunities, close deals faster, and stay ahead in today’s competitive market.
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div class="links">
+      <div class="link-box">
+        <a href="https://vendita.ai/" target="_blank">Vendita AI</a>
+      </div>
+      <div class="link-box">
+        <a href="https://bzail.com/" target="_blank">BZAIL Site Selection</a>
+      </div>
+      <div class="link-box">
+        <a href="https://vendita.ai/vendita-cre/" target="_blank">Vendita CRE</a>
       </div>
     </div>
-    <div class="tagline-bar">
-      <div class="tagline-inner">Powering the <span>Future of Real Estate</span></div>
-    </div>
-  </header>
-
-  <!-- ===== Main ===== -->
-  <main class="container">
-    <div class="stack">
-      <!-- Booth notice -->
-      <section class="notice" aria-label="ICSC Booth">
-        <div class="inner">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-7z" stroke="#1E67FF" stroke-width="1.6"/></svg>
-          Come see us at <strong>ICSC • Booth #3013</strong>
-        </div>
-      </section>
-
-      <!-- About Us (elevator pitch) -->
-      <section class="card narrow" aria-labelledby="about-title">
-        <div class="inner">
-          <h2 id="about-title">About Us</h2>
-          <p>
-            Vendita AI’s <strong>BZAIL Site Selection</strong> is built for <strong>brokers, developers, and investors</strong> who need speed and precision in their deal flow.
-            Our platform <strong>streamlines due diligence</strong> by surfacing <strong>actionable off-market properties</strong> and giving you the insights you need to
-            <strong>make faster, smarter decisions and close deals with confidence</strong>.
-          </p>
-        </div>
-      </section>
-
-      <!-- Book a Demo (full width to align with links) -->
-      <section class="card" id="demo" aria-labelledby="demo-title">
-        <div class="inner" style="text-align:center">
-          <h2 id="demo-title">Book a Demo</h2>
-          <a class="btn" style="margin-top:6px" href="https://link.bzail.ai/widget/bookings/venditacre" target="_blank" rel="noopener">Schedule via Calendly</a>
-        </div>
-      </section>
-
-      <!-- Links -->
-      <section class="links-row" aria-label="Products and Links">
-        <div class="link-card">
-          <a href="https://vendita.ai/" target="_blank" rel="noopener">Vendita AI</a>
-          <span class="suburl">vendita.ai</span>
-        </div>
-        <div class="link-card">
-          <a href="https://bzail.com/" target="_blank" rel="noopener">BZAIL Site Selection</a>
-          <span class="suburl">bzail.com</span>
-        </div>
-        <div class="link-card">
-          <a href="https://vendita.ai/vendita-cre/" target="_blank" rel="noopener">Vendita CRE</a>
-          <span class="suburl">vendita.ai/vendita-cre</span>
-        </div>
-      </section>
-    </div>
-
-    <footer>
-      © <span id="yr"></span> Vendita AI • All rights reserved
-    </footer>
-  </main>
-
-  <script>
-    // Year stamp
-    document.getElementById('yr').textContent = new Date().getFullYear();
-
-    // Robust autoplay handling: retry play() if blocked; reattempt on visibility change
-    (function(){
-      var v = document.getElementById('bgVideo');
-      if(!v) return;
-      v.muted = true; v.setAttribute('muted',''); v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
-
-      function tryPlay(){
-        var p = v.play && v.play();
-        if(p && typeof p.catch === 'function'){
-          p.catch(function(){
-            v.muted = true; v.setAttribute('muted','');
-            setTimeout(function(){ v.play && v.play(); }, 300);
-          });
-        }
-      }
-      if (v.readyState >= 2) { tryPlay(); }
-      else { v.addEventListener('loadeddata', tryPlay); }
-      document.addEventListener('visibilitychange', function(){ if(!document.hidden) tryPlay(); });
-      v.addEventListener('error', function(){ /* poster fallback remains */ });
-    })();
-  </script>
+  </div>
 </body>
 </html>
+
 
 
 
