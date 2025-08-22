@@ -33,7 +33,7 @@
     .header-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
     .brand{display:flex;align-items:center;gap:10px}
     .brand img{height:40px;width:auto}
-    .brand .wordmark{font-weight:800;color:var(--text)}
+    .brand .wordmark{font-weight:800;color:var(--blue);font-size:18px;letter-spacing:.2px}
     .cta{display:flex;gap:10px}
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:10px;border:1px solid #d7e2f3;color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue-2));font-weight:800;text-decoration:none;box-shadow:0 8px 22px rgba(30,103,255,.32)}
 
@@ -75,10 +75,11 @@
 <body>
   <!-- ===== Background ===== -->
   <div class="bg-wrap" aria-hidden="true">
-    <video class="bg-video" autoplay muted loop playsinline webkit-playsinline poster="/skyscraper_still.png">
-      <source src="/skyscraper_small.mp4" type="video/mp4" />
+    <video class="bg-video" id="bgVideo" autoplay muted loop playsinline webkit-playsinline poster="skyscraper_still.png">
+      <source src="skyscraper_small.mp4" type="video/mp4" />
     </video>
     <div class="bg-gradient"></div>
+  </div>
   </div>
   </div>
 
@@ -114,7 +115,7 @@
         <div class="inner">
           <h2 id="about-title">About Us</h2>
           <p>
-            Discover the future of real estate technology at ICSC. Vendita AI unifies powerful products — including BZAIL Site Selection, Vendita CRE, and BZAIL CRM — to help owners, investors, and operators make faster, smarter decisions. By combining thousands of data points with explainable AI, we deliver insights that reduce risk and maximize portfolio value. <br/><br/>Come meet our team live at ICSC to see how Vendita AI is transforming site selection and portfolio management.
+            Built for <strong>retailers, developers, brokers, and investors</strong> who live and breathe site selection. <strong>Vendita AI</strong> turns nationwide assessor and market data into <em>clear, explainable</em> location intelligence—so you can screen markets, compare candidates, and justify your choices in minutes. Powered by <strong>BZAIL Site Selection</strong> with companion tools <strong>Vendita CRE</strong> and <strong>BZAIL CRM</strong> to keep research and outreach moving fast.
           </p>
         </div>
       </section>
@@ -153,8 +154,35 @@
     // Year stamp
     document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
+  <script>
+    // Robust autoplay handling (iOS/Android): retry if the promise rejects, ensure muted/inline
+    (function(){
+      var v = document.getElementById('bgVideo');
+      if(!v) return;
+      v.setAttribute('muted','');
+      v.muted = true;
+      v.setAttribute('playsinline','');
+      v.setAttribute('webkit-playsinline','');
+      function tryPlay(){
+        var p = v.play && v.play();
+        if(p && typeof p.catch === 'function'){
+          p.catch(function(){
+            // Nudge attributes and try again shortly
+            v.muted = true;
+            v.setAttribute('muted','');
+            setTimeout(function(){ v.play && v.play(); }, 400);
+          });
+        }
+      }
+      v.addEventListener('loadeddata', tryPlay);
+      document.addEventListener('visibilitychange', function(){ if(!document.hidden) tryPlay(); });
+      // Fallback: if video errors, keep poster
+      v.addEventListener('error', function(){ /* poster remains visible */ });
+    })();
+  </script>
 </body>
 </html>
+
 
 
 
