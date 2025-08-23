@@ -43,18 +43,28 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 20px;
       padding: 15px 40px;
       background: white;
       color: #0056b3;
       font-weight: bold;
     }
-    header img {
-      height: 50px;
-      margin-right: 10px;
-    }
     .header-left {
       display: flex;
       align-items: center;
+      gap: 10px;
+      color: #1E67FF; /* Vendita blue for wordmark */
+    }
+    .header-left img {
+      height: 50px;
+      width: auto;
+      display: block;
+    }
+    .header-left .company-name {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #1E67FF; /* Vendita blue */
+      white-space: nowrap;
     }
     .header-quote {
       flex: 1;
@@ -62,6 +72,7 @@
       font-size: 1.6em;
       font-weight: bold;
       color: #0056b3;
+      line-height: 1.2;
     }
     .header-right a {
       background: #0056b3;
@@ -70,6 +81,11 @@
       border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .header-right a:hover {
+      background: #003f9e;
     }
 
     /* Hero Section */
@@ -122,6 +138,39 @@
       font-weight: bold;
       text-decoration: none;
     }
+
+    /* ===== Mobile optimization ===== */
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 16px;
+        gap: 10px;
+        text-align: left;
+      }
+      .header-left {
+        justify-content: center;
+      }
+      .header-left img { height: 42px; }
+      .header-left .company-name {
+        font-size: 1.3em;
+      }
+      .header-quote {
+        order: 2;
+        font-size: 1.3em;
+        text-align: center;
+        padding: 0 8px;
+      }
+      .header-right {
+        display: flex;
+        justify-content: center;
+      }
+      .header-right a {
+        width: auto;
+        padding: 10px 16px;
+      }
+      .hero { margin-top: 24px; }
+    }
   </style>
 </head>
 <body>
@@ -137,11 +186,11 @@
     <header>
       <div class="header-left">
         <img src="vendita_logo_1.png" alt="Vendita Logo">
-        <span>Vendita AI</span>
+        <span class="company-name">Vendita AI</span>
       </div>
       <div class="header-quote">Powering the Future of Real Estate</div>
       <div class="header-right">
-        <a href="https://link.bzail.ai/widget/bookings/venditacre" target="_blank">Book a Demo</a>
+        <a href="https://link.bzail.ai/widget/bookings/venditacre" target="_blank">Book a 1 on 1</a>
       </div>
     </header>
 
@@ -155,9 +204,9 @@
     <div class="content-box">
       <h2>About Us</h2>
       <p>
-        Vendita AI’s Site Selection Tool is built for brokers, developers, and investors.  
-        It drastically speeds up the due diligence process, giving you actionable insights  
-        into off-market properties. With data-driven intelligence at your fingertips, you  
+        Vendita AI’s Site Selection Tool is built for brokers, developers, and investors.
+        It drastically speeds up the due diligence process, giving you actionable insights
+        into off-market properties. With data-driven intelligence at your fingertips, you
         can identify opportunities, close deals faster, and stay ahead in today’s competitive market.
       </p>
     </div>
@@ -177,6 +226,7 @@
   </div>
 </body>
 </html>
+
 
 
 
